@@ -150,7 +150,7 @@ function renderView() {
             const match = calculateMatch();
             
             // Re-render ambient background
-            document.body.className = \`theme-\${match.toLowerCase()}\`;
+            document.body.className = `theme-${match.toLowerCase()}`;
             
             if (match === 'DA') {
                 wrapper.innerHTML = `

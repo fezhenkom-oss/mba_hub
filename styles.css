@@ -7,8 +7,8 @@
     --accent-green: #34C759;
     --accent-green-glow: rgba(52, 199, 89, 0.3);
     
-    --accent-blue: #007AFF;
-    --accent-blue-glow: rgba(0, 122, 255, 0.3);
+    --accent-amber: #FF9F0A;
+    --accent-amber-glow: rgba(255, 159, 10, 0.3);
     
     --accent-purple: #AF52DE;
     --accent-purple-glow: rgba(175, 82, 222, 0.3);
@@ -59,7 +59,7 @@ body {
 .orb-1 {
     width: 400px;
     height: 400px;
-    background: var(--accent-blue-glow);
+    background: var(--accent-amber-glow);
     top: -100px;
     left: -100px;
 }
@@ -313,7 +313,7 @@ h1 {
 
 .theme-da .badge { background: var(--accent-green-glow); color: var(--accent-green); }
 .theme-dsai .badge { background: var(--accent-purple-glow); color: var(--accent-purple); }
-.theme-aiml .badge { background: var(--accent-blue-glow); color: var(--accent-blue); }
+.theme-appai .badge { background: var(--accent-amber-glow); color: var(--accent-amber); }
 
 .reveal-h1 {
     font-size: 3.5rem;
@@ -323,7 +323,7 @@ h1 {
 
 .theme-da .highlight { color: var(--accent-green); }
 .theme-dsai .highlight { color: var(--accent-purple); }
-.theme-aiml .highlight { color: var(--accent-blue); }
+.theme-appai .highlight { color: var(--accent-amber); }
 
 .feature-list {
     list-style: none;

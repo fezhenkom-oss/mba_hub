@@ -45,19 +45,21 @@ function initializeApp() {
 function calculateMatch() {
     const { bg, goal, exp } = state.answers;
     
-    // AI & ML logic
-    if (goal === 'build' || (bg === 'tech' && exp === 'adv') || (exp === 'adv' && goal !== 'automate')) {
-        return 'AIML';
+    // Applied AI: non-technical professionals using AI in their current role (no-code track)
+    // Sales playbook: "NÃO quer programar + mesmo cargo = MBA Applied AI"
+    if (bg === 'business' || exp === 'none') {
+        return 'APPAI';
     }
     
-    // DA & AI logic
-    if (goal === 'automate' || bg === 'business' || exp === 'none') {
-        if (goal === 'predict' && bg !== 'business') return 'DSAI';
-        return 'DA';
+    // DS & AI: technical builders who want to build models and ML systems
+    // Sales playbook: "QUER PROGRAMAR + ML/modelos = MBA DS&AI"
+    if (goal === 'build' || (bg === 'tech' && exp === 'adv') || (goal === 'predict' && bg === 'tech')) {
+        return 'DSAI';
     }
     
-    // DS & AI logic (Default for analytical profiles)
-    return 'DSAI';
+    // DA & AI: analytical profiles, career switchers into data roles, BI/dashboard focus
+    // Sales playbook: "QUER MUDAR + analytics/dashboards/automação = MBA DA&AI"
+    return 'DA';
 }
 
 function formatCurrency(val) {
@@ -84,8 +86,8 @@ function renderView() {
                     </div>
                     <div class="intent-card" onclick="handleIntentClick('engineer')">
                         <span class="emoji">🤖</span>
-                        <h3>Quero construir Sistemas de IA</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Treinar modelos, criar AI Agents e colocar inteligência artificial em produção.</p>
+                        <h3>Quero construir e programar IA</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Treinar modelos, criar sistemas de ML e colocar soluções de IA em produção com código.</p>
                     </div>
                     <div class="intent-card" onclick="handleIntentClick('science')">
                         <span class="emoji">🔬</span>
@@ -150,7 +152,8 @@ function renderView() {
             const match = calculateMatch();
             
             // Re-render ambient background
-            document.body.className = `theme-${match.toLowerCase()}`;
+            const themeMap = { 'DA': 'theme-da', 'DSAI': 'theme-dsai', 'APPAI': 'theme-appai' };
+            document.body.className = themeMap[match] || 'theme-da';
             
             if (match === 'DA') {
                 wrapper.innerHTML = `
@@ -172,23 +175,23 @@ function renderView() {
                         </div>
                     </div>
                 `;
-            } else if (match === 'AIML') {
+            } else if (match === 'APPAI') {
                 wrapper.innerHTML = `
-                    <div class="reveal-state theme-aiml">
-                        <span class="badge">MBA AI & Machine Learning</span>
-                        <h1 class="reveal-h1">Seu match ideal: <br><span class="highlight">O Engenheiro de IA.</span></h1>
-                        <p class="subtitle" style="text-align: left; max-width: 800px;">Para quem quer construir os sistemas de IA — não apenas usá-los. Você aprenderá a construir LLMs, implementar AI Agents (LangGraph/CrewAI) e levar sistemas avançados para produção.</p>
+                    <div class="reveal-state theme-appai">
+                        <span class="badge">MBA Inteligência Artificial Aplicada</span>
+                        <h1 class="reveal-h1">Seu match ideal: <br><span class="highlight">O Profissional Potencializado.</span></h1>
+                        <p class="subtitle" style="text-align: left; max-width: 800px;">IA não é só para quem programa. É para quem quer produzir mais, decidir melhor e se tornar a referência em IA na sua organização — sem abandonar a carreira que você já tem. Em 10 meses, 8 horas por semana, 100% sem código.</p>
                         
                         <ul class="feature-list">
-                            <li><span class="emoji">🤖</span> <div><strong>Engenharia End-to-End</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Treinamento intensivo de 10 meses em MLOps e Agents.</span></div></li>
-                            <li><span class="emoji">💻</span> <div><strong>20 Projetos Reais</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Sistemas RAG, chatbots e pipelines MLOps escaláveis.</span></div></li>
-                            <li><span class="emoji">🌍</span> <div><strong>Perfil Global & Certificações AWS</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Aprovado pelo MEC e com até 2 AWS ML selos no currículo.</span></div></li>
-                            <li><span class="emoji">🎯</span> <div><strong>Garantia de Emprego (+ R$27.1k Sênior)</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Mercado internacional buscando o que você aprenderá conosco.</span></div></li>
+                            <li><span class="emoji">⚡</span> <div><strong>100% Sem Código</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Do Sprint 1 ao projeto final — feito para profissionais de negócio, sem pré-requisito técnico.</span></div></li>
+                            <li><span class="emoji">🤖</span> <div><strong>Construa AI Agents Reais</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Automatize processos e crie agentes com Make, n8n e plataformas no-code. 11 projetos no portfólio.</span></div></li>
+                            <li><span class="emoji">🏛</span> <div><strong>Diploma MEC + Certificações ASU & AWS</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Diploma reconhecido + Arizona State University + AWS GenAI Foundations no currículo.</span></div></li>
+                            <li><span class="emoji">📈</span> <div><strong>Prêmio Salarial de 56% em IA</strong><br><span style="color: var(--text-secondary); font-size: 0.9rem;">Profissionais com skills de IA ganham 56% a mais — PwC AI Jobs Barometer 2025. Você vai usar isso na semana que vem.</span></div></li>
                         </ul>
                         
                         <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                            <button class="btn-submit" style="width: auto;" onclick="alert('Enviando syllabus AIML')">Receber Syllabus no WhatsApp</button>
-                            <button class="btn-submit" style="width: auto; background: transparent; border: 1px solid var(--glass-border); color: white;" onclick="alert('Agendando AIML')">Consultoria Grátis</button>
+                            <button class="btn-submit" style="width: auto;" onclick="alert('Enviando syllabus Applied AI')">Receber Syllabus no WhatsApp</button>
+                            <button class="btn-submit" style="width: auto; background: transparent; border: 1px solid var(--glass-border); color: white;" onclick="alert('Agendando Applied AI')">Consultoria Grátis</button>
                         </div>
                     </div>
                 `;

@@ -267,7 +267,7 @@ function renderView() {
             `;
             break;
 
-        case 'QUIZ':
+        case 'QUIZ': {
             const q = state.questions[state.currentQuestionIndex];
             const progressPct = (state.currentQuestionIndex / state.questions.length) * 100;
             let optionsHtml = q.options.map(opt => `<button class="answer-btn" onclick="handleAnswer('${q.id}', '${opt.id}')">${opt.label}</button>`).join('');
@@ -310,13 +310,15 @@ function renderView() {
                 </div>
             `;
             break;
+        }
 
-        case 'REVEAL':
+        case 'REVEAL': {
             const match = calculateMatch();
-            appContainer.classList.add('reveal-mode'); // allow full width left align
+            appContainer.classList.add('reveal-mode');
             document.body.className = PRODUCT_DATA[match].theme;
             wrapper.innerHTML = renderRevealPage(match);
             break;
+        }
     }
 
     appContainer.appendChild(wrapper);
